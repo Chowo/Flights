@@ -29,6 +29,7 @@ class ApplyingFiltersTest {
         flights.add(LONG_GROUNDED_FLIGHT);
     }
 
+
     @Test
     void filterNormalWork() {
         List<Flight> result = appFilters.filter(flights, "NoPastFlights", "BackwardsFlightsFilter", "LessThanTwoHoursGrounded");
@@ -40,5 +41,26 @@ class ApplyingFiltersTest {
         List<Flight> result = appFilters.filter(flights, "");
         assertEquals(flights, result);
     }
+
+    @Test
+    void filterNoPastFlights() {
+        List<Flight> result = appFilters.filter(flights, "NoPastFlights");
+        assertEquals(List.of(NORMAL_FLIGHT, BACKWARDS_FLIGHT, LONG_GROUNDED_FLIGHT), result);
+    }
+
+    @Test
+    void filterBackwardsFlights() {
+        List<Flight> result = appFilters.filter(flights,"BackwardsFlightsFilter");
+        assertEquals(List.of(NORMAL_FLIGHT, PAST_FLIGHT, LONG_GROUNDED_FLIGHT), result);
+    }
+
+    @Test
+    void filterLessThanTwoHoursGrounded() {
+        List<Flight> result = appFilters.filter(flights,"LessThanTwoHoursGrounded");
+        assertEquals(List.of(NORMAL_FLIGHT, PAST_FLIGHT, BACKWARDS_FLIGHT), result);
+    }
+
+
+
 
 }
