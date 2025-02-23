@@ -32,6 +32,9 @@ public class ApplyingFilters {
 
     public List<Flight> filter(List<Flight> flights, String... filtersNames) {
         List<FlightsFilter> enabledFilters = getEnabledFilters(filtersNames);
+        if (enabledFilters.isEmpty()) {
+            return flights;
+        }
         List<Flight> result = flights;
         for (FlightsFilter filter : enabledFilters) {
             result = filter.filter(result);
