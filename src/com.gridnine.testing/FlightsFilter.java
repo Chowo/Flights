@@ -1,11 +1,29 @@
 package com.gridnine.testing;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface FlightsFilter {
+public abstract class FlightsFilter {
 
-    List<Flight> filter(List<Flight> flights);
+    private boolean enabled = false;
 
-    boolean isValid(Flight flight);
+    List<Flight> filter(List<Flight> flights) {
+        return flights.stream().filter(this::isValid).collect(Collectors.toList());
+    }
+
+    abstract boolean isValid(Flight flight);
+
+    void enable() {
+        enabled = true;
+    }
+
+    void disable() {
+        enabled = false;
+    }
+
+    boolean isEnabled() {
+        return enabled;
+    }
+
 
 }

@@ -1,15 +1,9 @@
 package com.gridnine.testing;
 
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class LessThanTwoHoursGrounded implements FlightsFilter{
-    @Override
-    public List<Flight> filter(List<Flight> flights) {
-        return flights.stream().filter(this::isValid).collect(Collectors.toList());
-    }
+public class LessThanTwoHoursGrounded extends FlightsFilter {
 
     @Override
     public boolean isValid(Flight flight) {
@@ -18,10 +12,9 @@ public class LessThanTwoHoursGrounded implements FlightsFilter{
             return true;
         }
         long groundedTime = 0L;
-        for (int i = 0; i < segments.size()-1; i++) {
+        for (int i = 0; i < segments.size() - 1; i++) {
 
-            groundedTime=+ChronoUnit.HOURS.between(segments.get(1).getDepartureDate(), segments.get(0).getArrivalDate());
-
+            groundedTime = +ChronoUnit.HOURS.between(segments.get(0).getArrivalDate(), segments.get(1).getDepartureDate());
         }
         if (groundedTime > 2) {
             return false;
