@@ -1,6 +1,10 @@
 package com.gridnine.testing;
 
+import com.gridnine.testing.filterEnum.FiltersName;
+
 import java.util.List;
+
+import static com.gridnine.testing.filterEnum.FiltersName.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,10 +12,10 @@ public class Main {
         System.out.println(allFlights);
         ApplyingFilters filters = new ApplyingFilters();
         System.out.println();
-        System.out.println(filters.filter(allFlights, "NoPastFlights"));
-        System.out.println(filters.filter(allFlights, "BackwardsFlightsFilter"));
-        System.out.println(filters.filter(allFlights, "LessThanTwoHoursGrounded"));
+        System.out.println(filters.filter(allFlights, NO_PAST_FLIGHTS));
+        System.out.println(filters.filter(allFlights, BACKWARDS_FLIGHT));
+        System.out.println(filters.filter(allFlights, LESS_THAN_TWO_HOURS_GROUNDED));
         System.out.println();
-        System.out.println(filters.filter(allFlights,"NoPastFlights", "BackwardsFlightsFilter", "LessThanTwoHoursGrounded"));
+        System.out.println(filters.filter(allFlights,NO_PAST_FLIGHTS, BACKWARDS_FLIGHT, LESS_THAN_TWO_HOURS_GROUNDED));
     }
 }

@@ -14,9 +14,9 @@ public class LessThanTwoHoursGrounded extends FlightsFilter {
         long groundedTime = 0L;
         for (int i = 0; i < segments.size() - 1; i++) {
 
-            groundedTime = +ChronoUnit.HOURS.between(segments.get(0).getArrivalDate(), segments.get(1).getDepartureDate());
+            groundedTime += ChronoUnit.MINUTES.between(segments.get(i).getArrivalDate(), segments.get(i + 1).getDepartureDate());
         }
-        if (groundedTime > 2) {
+        if (groundedTime > 120) {
             return false;
         } else {
             return true;
